@@ -1,0 +1,77 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgb(228, 228, 228);
+}
+
+h2{
+    text-align: center;
+    font-size: 45px;
+}
+
+#app{
+    max-width: 40%;
+    margin: auto;
+    padding: 10px 0;
+    display: grid;
+    grid-template-columns:repeat(5,1fr);
+    gap: 7px;
+}
+#app .item{
+    position: relative;
+    background-color: white;
+    border-radius: 7px;
+    overflow: hidden;
+    border: 1px solid rgb(186, 172, 172);
+    text-align: center;
+    align-items: center;
+    box-shadow: 0 0 2px 1px rgb(162, 162, 162);
+    cursor: pointer;
+}
+#app .item:hover{
+    background-color: rgb(232, 213, 213);
+    box-shadow: 0 0 5px 2px rgb(162, 162, 162);
+}
+#app .before::before{
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+}
+
+
+#app .item img{
+    width: 100%;
+}
+#app .item p{
+    padding: 3px 7px;
+    margin: 0;
+    background: red;
+    color: white;
+    font-size: 1.2em;
+}
+
+.chooseTrue{
+    background: rgb(95, 229, 95) !important;
+    border: 1px solid green !important;
+}
+.chooseFalse{
+    background: rgb(240, 69, 69) !important;
+    border: 1px solid red !important;
+}
+
+
+@media only screen and  (max-width: 560px) {
+    #app{
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    #app{
+        max-width: 75%;
+    }
+}

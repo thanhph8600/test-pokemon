@@ -1,0 +1,7 @@
+{
+  "compilerOptions": {
+    "rootDir": "./src", // Nơi chứa các tệp TypeScript
+    "outDir": "./dist" // Nơi chứa các tệp JavaScript sau khi biên dịch
+  },
+  "include": ["src"] // Chỉ biên dịch các tệp trong thư mục src
+}
