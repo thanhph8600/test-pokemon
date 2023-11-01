@@ -34,6 +34,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var audio01 = document.getElementById('audio-01');
+var audio02 = document.getElementById('audio-02');
+var audio03 = document.getElementById('audio-03');
+audio01.volume = 0.1;
 var pokemon;
 var lever = 2;
 function getPokemon() {
@@ -129,10 +133,14 @@ $(document).on('click', '.before', function () {
         choose.push(item);
     }
     else {
+        audio02.pause();
+        audio03.pause();
         checkChoose = 0;
         var item = $(this).removeClass('before');
         choose.push(item);
         if (checkTrueFalse(choose)) {
+            audio02.currentTime = 0;
+            audio02.play();
             chooseTrue(choose);
             countItem -= 2;
             if (countItem == 0) {
@@ -146,6 +154,8 @@ $(document).on('click', '.before', function () {
             }
         }
         else {
+            audio03.currentTime = 0;
+            audio03.play();
             closeTime(choose, 1000);
         }
         checkTimeOut = true;

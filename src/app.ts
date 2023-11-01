@@ -1,3 +1,9 @@
+var audio01 = document.getElementById('audio-01')
+var audio02 = document.getElementById('audio-02')
+var audio03 = document.getElementById('audio-03')
+
+audio01.volume = 0.1
+
 let pokemon : {
     id:number,
     name: string,
@@ -86,11 +92,16 @@ $(document).on('click','.before',function(){
         var item =  $(this).removeClass('before');
         choose.push(item)
     }else{
+        audio02.pause();
+        audio03.pause();
+    
         checkChoose=0
 
         var item =  $(this).removeClass('before');
         choose.push(item)
         if(checkTrueFalse(choose)){
+            audio02.currentTime = 0;
+            audio02.play()
             chooseTrue(choose)
             countItem -= 2
             
@@ -105,6 +116,8 @@ $(document).on('click','.before',function(){
                 }, 0);
             }
         }else{
+            audio03.currentTime = 0;
+            audio03.play()
             closeTime(choose,1000)
         }
         checkTimeOut = true
