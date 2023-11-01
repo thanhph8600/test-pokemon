@@ -8,13 +8,15 @@ let pokemon : {
 async function getPokemon(){
     document.querySelector('#app').innerHTML = '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>'
     let listPokemon: Object[] = [];
-    const pokemons: number = 10;
     let arrID: number[]=[]
     for (let i = 0; i < 10; i++) {
-        arrID.push(Math.random()*1000)        
+        arrID.push(Math.round(Math.random()*1000))        
     }
-    for (let i = 1; i <= pokemons; i++) {
-        let data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)
+    
+
+    for (let i = 0; i < 10; i++) {
+        
+        let data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${arrID[i]}`)
         let keke: any = await data.json()
         pokemon = {
             id: keke.id,
@@ -83,7 +85,6 @@ $(document).on('click','.before',function(){
         if(checkTrueFalse(choose)){
             chooseTrue(choose)
             countItem -= 2
-            console.log(countItem);
             
             if(countItem == 0){
                 countItem=20

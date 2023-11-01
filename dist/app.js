@@ -37,22 +37,21 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var pokemon;
 function getPokemon() {
     return __awaiter(this, void 0, void 0, function () {
-        var listPokemon, pokemons, arrID, i, i, data, keke;
+        var listPokemon, arrID, i, i, data, keke;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     document.querySelector('#app').innerHTML = '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>';
                     listPokemon = [];
-                    pokemons = 10;
                     arrID = [];
                     for (i = 0; i < 10; i++) {
-                        arrID.push(Math.random() * 1000);
+                        arrID.push(Math.round(Math.random() * 1000));
                     }
-                    i = 1;
+                    i = 0;
                     _a.label = 1;
                 case 1:
-                    if (!(i <= pokemons)) return [3 /*break*/, 5];
-                    return [4 /*yield*/, fetch("https://pokeapi.co/api/v2/pokemon/".concat(i))];
+                    if (!(i < 10)) return [3 /*break*/, 5];
+                    return [4 /*yield*/, fetch("https://pokeapi.co/api/v2/pokemon/".concat(arrID[i]))];
                 case 2:
                     data = _a.sent();
                     return [4 /*yield*/, data.json()];
@@ -128,7 +127,6 @@ $(document).on('click', '.before', function () {
         if (checkTrueFalse(choose)) {
             chooseTrue(choose);
             countItem -= 2;
-            console.log(countItem);
             if (countItem == 0) {
                 countItem = 20;
                 alert("Bạn giỏi quá");
