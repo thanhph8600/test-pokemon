@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var pokemon;
+var lever = 2;
 function getPokemon() {
     return __awaiter(this, void 0, void 0, function () {
         var listPokemon, arrID, i, i, data, keke;
@@ -44,13 +45,13 @@ function getPokemon() {
                     document.querySelector('#app').innerHTML = '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>';
                     listPokemon = [];
                     arrID = [];
-                    for (i = 0; i < 10; i++) {
+                    for (i = 0; i < lever; i++) {
                         arrID.push(Math.round(Math.random() * 1000));
                     }
                     i = 0;
                     _a.label = 1;
                 case 1:
-                    if (!(i < 10)) return [3 /*break*/, 5];
+                    if (!(i < lever)) return [3 /*break*/, 5];
                     return [4 /*yield*/, fetch("https://pokeapi.co/api/v2/pokemon/".concat(arrID[i]))];
                 case 2:
                     data = _a.sent();
@@ -77,11 +78,11 @@ function getPokemon() {
     });
 }
 function htmlItemPokemon(item) {
-    return "\n            <div class=\"detailItem\">\n                <div data=\"".concat(item.id, "\" class=\"item before idPokemon-").concat(item.id, "\">\n                    <img src=\"").concat(item.image, "\">\n                    <p>#").concat(item.id, "</p>\n                </div>\n            </div>\n            ");
+    return "\n            <div class=\"detailItem\">\n                <div data=\"".concat(item.id, "\" class=\"item idPokemon-").concat(item.id, "\">\n                    <img src=\"").concat(item.image, "\">\n                    <p>#").concat(item.id, "</p>\n                </div>\n            </div>\n            ");
 }
 function renderPokemon() {
     return __awaiter(this, void 0, void 0, function () {
-        var listPokemon, html;
+        var listPokemon, html, item;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, getPokemon()];
@@ -91,6 +92,13 @@ function renderPokemon() {
                         return htmlItemPokemon(item);
                     });
                     document.querySelector('#app').innerHTML = html.join('');
+                    item = document.querySelectorAll('.item');
+                    setTimeout(function () {
+                        for (var i = 0; i < item.length; i++) {
+                            var element = item[i];
+                            element.classList.add('before');
+                        }
+                    }, 1000);
                     return [2 /*return*/];
             }
         });
@@ -103,7 +111,7 @@ var closeTime = function (item, time) {
     }, time);
 };
 var timeoutId = closeTime();
-var countItem = 20;
+var countItem = lever * 2;
 var checkChoose = 0;
 var choose = [];
 var checkTimeOut = false;
@@ -128,9 +136,13 @@ $(document).on('click', '.before', function () {
             chooseTrue(choose);
             countItem -= 2;
             if (countItem == 0) {
-                countItem = 20;
-                alert("Bạn giỏi quá");
-                renderPokemon();
+                lever = lever + 1;
+                countItem = lever * 2;
+                setTimeout(function () {
+                    $('h2').html("Ke Ke lever ".concat(lever - 1));
+                    alert("Bạn giỏi quá Tới màng tiếp theo nào");
+                    renderPokemon();
+                }, 0);
             }
         }
         else {

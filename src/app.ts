@@ -5,16 +5,17 @@ let pokemon : {
     type: string,
 }
 
+var lever = 2
 async function getPokemon(){
     document.querySelector('#app').innerHTML = '<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>'
     let listPokemon: Object[] = [];
     let arrID: number[]=[]
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < lever; i++) {
         arrID.push(Math.round(Math.random()*1000))        
     }
     
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < lever; i++) {
         
         let data: Response = await fetch(`https://pokeapi.co/api/v2/pokemon/${arrID[i]}`)
         let keke: any = await data.json()
@@ -34,7 +35,7 @@ async function getPokemon(){
 function htmlItemPokemon(item){
     return `
             <div class="detailItem">
-                <div data="${item.id}" class="item before idPokemon-${item.id}">
+                <div data="${item.id}" class="item idPokemon-${item.id}">
                     <img src="${item.image}">
                     <p>#${item.id}</p>
                 </div>
@@ -48,6 +49,13 @@ async function renderPokemon() {
         return htmlItemPokemon(item)
     })
     document.querySelector('#app').innerHTML = html.join('')
+    var item = document.querySelectorAll('.item')
+    setTimeout(() => {
+        for (let i = 0; i < item.length; i++) {
+            const element = item[i];
+            element.classList.add('before')
+        }
+    }, 1000);   
 }
 renderPokemon()
 
@@ -58,7 +66,7 @@ let closeTime = (item?:any[],time?:number) => {
     }, time);
 }
 let timeoutId = closeTime();
-let countItem:number = 20;
+let countItem:number = lever*2;
 let checkChoose: number = 0;
 let choose: any[] = [];
 let checkTimeOut:boolean = false;
@@ -87,9 +95,14 @@ $(document).on('click','.before',function(){
             countItem -= 2
             
             if(countItem == 0){
-                countItem=20
-                alert("Bạn giỏi quá")
-                renderPokemon()
+                lever = lever + 1
+                countItem = lever * 2
+
+                setTimeout(() => {
+                    $('h2').html(`Ke Ke lever ${lever-1}`)
+                    alert("Bạn giỏi quá Tới màng tiếp theo nào")
+                    renderPokemon()
+                }, 0);
             }
         }else{
             closeTime(choose,1000)
